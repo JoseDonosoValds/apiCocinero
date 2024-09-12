@@ -8,6 +8,7 @@ servers:
     description: Servidor local de desarrollo
 
 paths:
+  
   /api/restaurant/product:
    get:
       summary: Obtener datos de las mesas
@@ -15,7 +16,7 @@ paths:
         "200":
           description: Lista de los datos de la mesa
           content:
-            aplication/json:
+            application/json:
              schema:
               type: array
               items:
@@ -32,33 +33,76 @@ paths:
                     description: precio del producto
                   categoria_id:
                     type: integer
-                    description: id de la categoria si es comida= 601 o bebida=600 
-
+                    description: id de la categoria si es comida= 601 o bebida=600
         "500":
           description: Error en el servidor product
- 
+  
+  /api/restaurant/categoria:
+      get:
+          summary: Obtener datos de las categorias
+          responses:
+            "200":
+              description: Lista de los datos de las categorias
+              content:
+                application/json:
+                  schema:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id_categoria:
+                          type: integer
+                          description: id de la categoria
+                        nombre_categoria:
+                          type: string
+                          description: nombre de la categoria
+            "500":
+              description: Error en el servidor categoria
+  
+  /api/restaurant/admin:
+    get:
+        summary: Obtener datos de los administradores
+        responses:
+            "200":
+              description: Lista de los datos de los administradores
+              content:
+                application/json:
+                  schema:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id_admin:
+                          type: integer
+                          description: id del administrador
+                        name_admin:
+                          type: string
+                          description: nombre del administrador
+            "500":
+              description: Error en el servidor admin
+  
   /api/restaurant/waiter:
     get:
         summary: Obtener datos de los camareros
         responses:
-          "200":
-            description: Lista de los datos de los camareros
-            content:
-              aplication/json:
-              schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    id:
-                      type: integer
-                      description: id del camarero
-                    name:
-                      type: string
-                      description: nombre del camarero
-          "500":
-            description: Error en el servidor camarero
-            
+            "200":
+              description: Lista de los datos de los camareros
+              content:
+                application/json:
+                  schema:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          description: id del camarero
+                        name:
+                          type: string
+                          description: nombre del camarero
+            "500":
+              description: Error en el servidor camarero        
+  
   /api/restaurant/mesa:
     get:
       summary: Obtener datos de las mesas
@@ -66,7 +110,7 @@ paths:
         "200":
           description: Lista de los datos de la mesa
           content:
-            aplication/json:
+            application/json:
              schema:
               type: array
               items:
@@ -83,8 +127,6 @@ paths:
                     description: estado de la mesa
         "500":
           description: Error en el servidor mesa
-
-
   /api/restaurant/join:
     get:
       summary: Obtener información de los pedidos y estado de las mesas
@@ -121,7 +163,6 @@ paths:
                       description: Cantidad de bebida en el pedido
         "500":
           description: Error en el servidor
-
   /api/restaurant/finalizarPedido/{idPedido}:
     post:
       summary: Finalizar un pedido
