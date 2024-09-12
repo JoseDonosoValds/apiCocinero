@@ -127,6 +127,56 @@ paths:
                     description: estado de la mesa
         "500":
           description: Error en el servidor mesa
+  
+  /api/restaurant/pedidos:
+    get:
+      summary: Obtener datos de los pedidos
+      responses:
+        "200":
+          description: Lista de los pedidos
+          content:
+            application/json:
+             schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  id_pedido:
+                    type: integer
+                    description: id del pedido
+                  mesa_id:
+                    type: integer
+                    description: id de la mesa
+                  inicio:
+                    type: timestamp
+                    description: hora en la que se recepcionó el pedido
+                  fin:
+                    type: timestamp
+                    description: hora en la que finalizó el pedido (null aun no finaliza)
+                  genero:
+                    type: string
+                    description: genero de la persona que pidió el pedido
+                  camarero_id: 
+                    type: integer
+                    description: id del camarero que atendió el pedido
+                  total_pedido:
+                    type: integer
+                    description: valor total del pedido
+                  id_bebida:
+                    type: integer
+                    description: id de la bebida
+                  bebida_cantidad:
+                    type: integer
+                    description: cantidad de bebida pedida
+                  id_comida:
+                    type: integer
+                    description: id de la comida
+                  comida_cantidad:
+                    type: integer
+                    description: cantidad de comida pedida
+        "500":
+          description: Error en el servidor mesa
+
   /api/restaurant/join:
     get:
       summary: Obtener información de los pedidos y estado de las mesas
