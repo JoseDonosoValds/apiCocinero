@@ -175,7 +175,7 @@ paths:
                     type: integer
                     description: cantidad de comida pedida
         "500":
-          description: Error en el servidor mesa
+          description: Error en el servidor pedido
 
   /api/restaurant/join:
     get:
