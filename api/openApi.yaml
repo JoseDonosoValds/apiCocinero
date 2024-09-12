@@ -1,0 +1,175 @@
+openapi: 3.0.0
+info:
+  title: API de Restaurante
+  description: API para manejar pedidos y mesas en un restaurante.
+  version: "1.0.0"
+servers:
+  - url: http://localhost:3000
+    description: Servidor local de desarrollo
+
+paths:
+  /api/restaurant/product:
+   get:
+      summary: Obtener datos de las mesas
+      responses:
+        "200":
+          description: Lista de los datos de la mesa
+          content:
+            aplication/json:
+             schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  id_product:
+                    type: integer
+                    description: id del producto
+                  name_product:
+                    type: string
+                    description: nombre de la product
+                  price:
+                    type: integer
+                    description: precio del producto
+                  categoria_id:
+                    type: integer
+                    description: id de la categoria si es comida= 601 o bebida=600 
+
+        "500":
+          description: Error en el servidor product
+ 
+  /api/restaurant/waiter:
+    get:
+        summary: Obtener datos de los camareros
+        responses:
+          "200":
+            description: Lista de los datos de los camareros
+            content:
+              aplication/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      description: id del camarero
+                    name:
+                      type: string
+                      description: nombre del camarero
+          "500":
+            description: Error en el servidor camarero
+            
+  /api/restaurant/mesa:
+    get:
+      summary: Obtener datos de las mesas
+      responses:
+        "200":
+          description: Lista de los datos de la mesa
+          content:
+            aplication/json:
+             schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  id_mesa:
+                    type: integer
+                    description: id de la mesa
+                  name_mesa:
+                    type: string
+                    description: nombre de la mesa
+                  estado_mesa:
+                    type: string
+                    description: estado de la mesa
+        "500":
+          description: Error en el servidor mesa
+
+
+  /api/restaurant/join:
+    get:
+      summary: Obtener información de los pedidos y estado de las mesas
+      responses:
+        "200":
+          description: Lista de pedidos y estado de las mesas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id_pedido:
+                      type: integer
+                      description: ID del pedido
+                    id_mesa:
+                      type: integer
+                      description: ID de la mesa
+                    estado_mesa:
+                      type: string
+                      description: Estado actual de la mesa
+                    comida_nombre:
+                      type: string
+                      description: Nombre del producto de comida
+                    cantidad_comida:
+                      type: string
+                      description: Cantidad de comida en el pedido
+                    bebida_nombre:
+                      type: string
+                      description: Nombre del producto de bebida
+                    cantidad_bebida:
+                      type: string
+                      description: Cantidad de bebida en el pedido
+        "500":
+          description: Error en el servidor
+
+  /api/restaurant/finalizarPedido/{idPedido}:
+    post:
+      summary: Finalizar un pedido
+      parameters:
+        - name: idPedido
+          in: path
+          required: true
+          description: ID del pedido que se desea finalizar
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Pedido finalizado correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Pedido finalizado correctamente
+        "400":
+          description: No se pudo finalizar el pedido
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: No se pudo finalizar el pedido
+        "404":
+          description: Pedido no encontrado o ya finalizado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Pedido no encontrado o ya finalizado
+        "500":
+          description: Error en el servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Error interno del servidor
